@@ -15,6 +15,7 @@ function AddTask(){
         li.appendChild(span);
     }
     inputfield.value = '';
+    savedata();
 
 
 }
@@ -22,10 +23,22 @@ function AddTask(){
 listContainer.addEventListener('click', function(e) {
     if (e.target.tagName === "LI"){
         e.target.classList.toggle('checked');
+        savedata();
 
     }
     else if (e.target.tagName === "SPAN") {
         e.target.parentElement.remove();
+        savedata();
     }
 
 }, false);
+
+const savedata = () => {
+    localStorage.setItem('data', listContainer.innerHTML);
+}
+
+const showtask = () => {
+    listContainer.innerHTML = localStorage.getItem('data');
+}
+
+showtask();
